@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en" data-theme="sage">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f6f5f0">
+  <meta name="description" content="Dinner Deck — your own cookbook, weekly dinner planner and shared shopping list.">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Dinner Deck">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" type="image/png" sizes="192x192" href="./assets/icon-192.png">
+  <link rel="apple-touch-icon" href="./assets/apple-touch-icon.png">
+  <link rel="stylesheet" href="./styles.css">
+  <title>Dinner Deck — Dinner, sorted.</title>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Main navigation">
+      <button class="brand" data-action="navigate" data-tab="planner" aria-label="Dinner Deck home">
+        <span class="brand-mark"><span class="mark-plate">✳</span></span>
+        <span class="brand-name">dinner<span>deck</span><small>DINNER, SORTED.</small></span>
+      </button>
+      <div class="sidebar-section-label">YOUR KITCHEN</div>
+      <nav id="sideNav" class="nav-list"></nav>
+      <div class="sidebar-bottom">
+        <div class="sidebar-tip"><span class="tip-spark">✦</span><strong>Less deciding.<br>More enjoying.</strong><span>A little help for the weekly dinner question.</span></div>
+        <div class="sidebar-foot">Made for your everyday kitchen <span>♡</span></div>
+      </div>
+    </aside>
+    <div class="main-shell">
+      <header class="topbar">
+        <div class="topbar-left"><span class="mobile-brand">dinner<span>deck</span></span><span id="crumb">/ Weekly planner</span></div>
+        <div class="topbar-right"><span id="storageIndicator" class="local-chip" title="Your data is saved on this device"></span><button id="quickTheme" class="icon-button top-theme" data-action="cycle-theme" aria-label="Change colour theme" title="Change colour theme"></button></div>
+      </header>
+      <main id="view" class="view" tabindex="-1"></main>
+    </div>
+    <nav id="bottomNav" class="bottom-nav" aria-label="App tabs"></nav>
+  </div>
+  <div id="modalRoot"></div>
+  <div id="toastRegion" role="status" aria-live="polite" class="toast-region"></div>
+  <input type="file" id="backupPicker" accept="application/json,.json" hidden>
+  <script src="./app.js" defer></script>
+</body>
+</html>
