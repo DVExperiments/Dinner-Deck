@@ -77,3 +77,72 @@ svg.icon {height:19px;width:19px;stroke-width:1.85;vertical-align:middle;flex:no
 .pantry-add-form{flex-wrap:wrap}.pantry-add-form .field{min-width:190px}}
 @media print{ @page{size:A4;margin:17mm}body{background:white!important;color:#1c1c1c!important;font-family:Arial,sans-serif!important;font-size:12pt}
 .app-shell,.modal-backdrop,.toast-region{display:none!important}.print-sheet{display:block!important}.print-sheet h1{font:bold 23pt Georgia,serif;margin:0 0 6mm}.print-sheet>p{font-size:11pt;color:#444;margin-bottom:10mm}.print-sheet h2{font-size:11pt;text-transform:uppercase;letter-spacing:1px;border-bottom:1px solid #999;padding-bottom:2mm;margin:6mm 0 3mm;break-after:avoid}.print-sheet ul{list-style:none;padding:0;margin:0}.print-sheet li{padding:2.5mm 0;border-bottom:1px solid #ddd;break-inside:avoid}}
+
+/* v1.2.1 — A compact calendar and one clear shopping workflow. */
+.topbar.planner-topbar #crumb{display:inline-block;color:var(--accent-deep);font:700 clamp(17px,1.6vw,22px)/1.15 Georgia,serif;letter-spacing:-.4px}
+.view{padding-top:22px}
+.compact-planner-heading{margin-bottom:18px}
+.compact-planner-heading .eyebrow{margin-bottom:4px}
+.compact-planner-heading h1{font-size:clamp(28px,2.8vw,37px);margin-bottom:5px}
+.compact-planner-heading p{line-height:1.4}
+.week-tools{margin-bottom:12px}
+.calendar-topline{margin:10px 0 9px}
+.calendar-topline p{line-height:1.45}
+.calendar-day{min-height:318px}
+.calendar-date{padding:11px 12px 9px}
+.calendar-art{height:94px;margin-bottom:9px}
+.calendar-meal-name{min-height:32px}
+.calendar-meal-hint{margin:4px 0 7px}
+.calendar-time{min-height:18px;margin-top:4px}
+.calendar-recipe-zone{padding:8px 9px 6px}
+.planner-footer{gap:8px}
+.week-summary{padding:13px 17px}
+.planner-preferences-line{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin:0 2px;color:var(--muted);font-size:11px}
+.planner-preferences-line .icon{color:var(--accent)}
+.planner-preferences-line button{color:var(--accent-deep);background:none;border:0;padding:2px 5px;text-decoration:underline;text-underline-offset:3px;font-weight:700}
+.compact-shopping-heading{margin-bottom:16px}
+.shop-overview{gap:10px;margin-bottom:13px}
+.shopping-metric{padding:12px 16px}
+.shopping-metric strong{font-size:23px}
+.shopping-main{padding:19px 23px}
+.shop-add-bar{background:var(--surface-muted);border:1px solid var(--border);border-radius:13px;padding:13px 14px 10px;margin-bottom:20px}
+.shop-add-label{display:flex;gap:7px;align-items:center;color:var(--accent-deep);font-size:10px;font-weight:820;letter-spacing:1.2px;margin:0 0 7px}
+.shop-add-row{display:flex;gap:8px}
+.shop-add-row .input{flex:1;min-width:0;background:var(--surface)}
+.shop-add-row .btn{min-width:118px}
+.shop-add-details{margin-top:8px}
+.shop-add-details summary{display:list-item;list-style-position:inside;cursor:pointer;font-size:11px;font-weight:700;color:var(--accent-deep);padding:5px 0;user-select:none}
+.shop-add-details summary span{font-weight:450;color:var(--muted)}
+.shop-add-fields{display:grid;grid-template-columns:.8fr 1fr 1.5fr;gap:9px;margin:9px 0 4px}
+.shop-add-fields .field{display:grid;gap:5px;min-width:0}
+.shop-add-fields .field span{font-size:10px;font-weight:700;color:var(--muted)}
+.shop-add-fields .input,.shop-add-fields .select{min-width:0;padding:9px 10px}
+.shop-export-select{margin-top:10px}
+.shopping-export-panel .shopping-button-stack{margin-top:12px;gap:8px}
+.export-dropdown-label{font-size:11px;font-weight:720;color:var(--text)}
+.export-action-select{cursor:pointer}
+.shopping-help{padding-top:18px;padding-bottom:18px}
+@media(max-width:900px){.shop-add-fields{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:650px){
+ .view{padding-top:17px}
+ .topbar.planner-topbar #crumb{font-size:12px;font-family:Inter,ui-sans-serif,system-ui,sans-serif;font-weight:700;letter-spacing:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:175px}
+ .topbar-left{min-width:0}.mobile-brand{flex:none}
+ .compact-planner-heading{margin-bottom:15px}
+ .compact-planner-heading h1{font-size:29px}
+ .compact-planner-heading p{font-size:12px}
+ .calendar-topline{margin-top:10px}
+ .calendar-day{min-height:336px}
+ .calendar-art{height:116px}
+ .calendar-date{padding:11px}
+ .calendar-meal-hint{margin:5px 0 7px}
+ .shopping-main{padding:13px 13px}
+ .shop-add-bar{padding:11px 10px;margin-bottom:16px}
+ .shop-add-row .btn{min-width:96px;padding:10px 9px;font-size:12px}
+ .shop-add-row .input{padding:10px;font-size:13px}
+ .shop-add-fields{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .shop-add-fields .field:last-child{grid-column:1 / -1}
+ .shopping-metric{padding:11px 8px}
+ .planner-preferences-line{margin-top:2px;line-height:1.5}
+ .week-summary{padding:13px}
+}
+@media(max-width:390px){.topbar.planner-topbar #crumb{max-width:126px;font-size:11px}.shop-add-row .btn{min-width:84px}.shop-add-row .btn .icon{display:none}}
