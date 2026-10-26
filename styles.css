@@ -146,3 +146,18 @@ svg.icon {height:19px;width:19px;stroke-width:1.85;vertical-align:middle;flex:no
  .week-summary{padding:13px}
 }
 @media(max-width:390px){.topbar.planner-topbar #crumb{max-width:126px;font-size:11px}.shop-add-row .btn{min-width:84px}.shop-add-row .btn .icon{display:none}}
+
+/* v1.3 — dinner diary, personal suggestions, and an accessible 5-star recipe rating control */
+.rating-pill{display:inline-flex;gap:4px;align-items:center;color:var(--accent-deep);background:var(--accent-soft)}
+.rating-pill .icon{width:12px;height:12px;fill:currentColor}
+.recipe-rating-panel{display:flex;align-items:center;justify-content:space-between;gap:15px;background:var(--surface-muted);border:1px solid var(--border);padding:13px 15px;border-radius:13px}
+.recipe-rating-panel strong{font-size:13px}.recipe-rating-panel p{font-size:11px;line-height:1.5;margin:4px 0 0;color:var(--muted);max-width:340px}
+.rating-stars{display:inline-flex;gap:2px;flex:none}.rating-star{width:35px;height:37px;border:1px solid transparent;border-radius:8px;background:transparent;color:var(--muted);display:grid;place-items:center;cursor:pointer}
+.rating-star .icon{width:22px;height:22px}.rating-star.filled{color:#c08c36}.rating-star.filled .icon{fill:currentColor}.rating-star:hover,.rating-star:focus-visible{background:var(--accent-soft);color:var(--accent-deep);outline:none}
+.discover-section{margin:0 0 18px}.suggestion-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:14px}.suggestion-card{display:flex;align-items:center;gap:10px;border:1px solid var(--border);background:var(--surface-muted);border-radius:12px;padding:10px;min-width:0}
+.suggestion-art{width:52px;height:54px;flex:none;display:grid;place-items:center;font-size:29px;border-radius:10px;background:var(--surface-alt);overflow:hidden}.suggestion-art img{width:100%;height:100%;object-fit:cover}
+.suggestion-info{flex:1;min-width:0;display:grid;gap:4px}.suggestion-info strong{font-size:12px;line-height:1.4}.suggestion-info span{font-size:10px;color:var(--muted)}.suggestion-info .suggestion-rating{color:var(--accent-deep);font-weight:750}
+.suggestion-actions{display:flex;align-items:center;gap:3px;flex:none}.suggestion-actions .icon-button{width:31px;height:34px;padding:7px}.suggestion-actions .btn{padding:7px 10px;min-height:34px}
+.history-secondary{margin-top:16px}.history-cook-btn{padding:6px 9px;min-height:32px}
+@media(max-width:1250px){.suggestion-grid{grid-template-columns:1fr}.suggestion-card{min-height:67px}.suggestion-art{width:55px}.suggestion-info strong{font-size:13px}}
+@media(max-width:650px){.recipe-rating-panel{flex-wrap:wrap}.rating-stars{width:100%;justify-content:space-between}.rating-star{flex:1}.suggestion-card{gap:8px}.suggestion-actions .btn{padding:6px 8px}.history-cook-btn{font-size:10px}}
