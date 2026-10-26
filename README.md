@@ -1,6 +1,6 @@
-# Dinner Deck v1.0 — personal dinner planner
+# Dinner Deck v1.1 — personal dinner planner
 
-Your recipe collection, a regeneratable seven-day dinner plan, and a consolidated shopping list in one installable web app.
+Your recipe collection, an intelligent horizontal weekly calendar, and a consolidated shopping list in one installable web app.
 
 ## Publish to GitHub Pages
 
@@ -13,10 +13,10 @@ Your recipe collection, a regeneratable seven-day dinner plan, and a consolidate
 ## How to use
 
 - **Recipes**: add a meal, give it an emoji/photo, ingredients (one per line), optional cooking directions and private notes. Edit/remove any recipe, including starter examples.
-- **Planner**: choose the week with the arrows; generate seven dinners, use ↻ on *one* dinner to replace it, lock dinners to keep them during whole-week generation, or pick a dinner manually. Mark dinners cooked to populate History.
+- **Planner**: Monday–Sunday spans horizontally. Scroll the calendar sideways on smaller screens. Tap a dinner card to open its full recipe and cooking notes, use ↻ to replace only that night, lock meals during whole-week generation, or choose a dinner manually. Mark dinners cooked for History. Smart planning options let you select quick nights, leftovers nights, recent-meal avoidance, and optional ingredient reuse.
 - **Shopping**: ingredients from all seven planned meals are combined automatically. Tick off items; add extra purchases; hide items you already have in the pantry; share using your phone's share sheet, copy, or download a `.txt` list.
 - **History**: see cooked dinners and past plans; reuse a previous week's plan.
-- **Settings**: choose from six themes, set servings, change shopping preferences, and export/import a JSON backup.
+- **Settings**: choose from six themes, set servings, configure quick dinners, leftover nights and ingredient-overlap suggestions, and export/import a JSON backup.
 
 ## Ingredient entry examples
 
@@ -38,4 +38,15 @@ The shopping list share button uses your device's native Web Share API when supp
 
 ## Version
 
-Dinner Deck v1.0.0, built as a framework-free, static HTML/CSS/JavaScript Progressive Web App.
+Dinner Deck v1.1.0, built as a framework-free, static HTML/CSS/JavaScript Progressive Web App.
+
+## v1.1 smarter scheduling
+
+- **Quick nights**: Choose weekdays when the generator should favour meals under a time limit. Default: Tuesday and Thursday, 30 minutes.
+- **Avoid repetition**: Recently planned dinners from older weeks receive a substantial penalty, with more category diversity in the current week.
+- **Ingredient overlap**: When reasonable, prioritise recipes using ingredients already required by another meal; this is a preference rather than an absolute rule.
+- **Leftovers**: Choose a leftovers night (Thursday by default). The generator uses the preceding day's recipe again as a linked leftovers meal. When making shopping totals, Dinner Deck calculates ingredients for *both nights* under one cooking session, taking household servings into account. You can also choose leftovers manually for any night except Monday when the prior night has a cooked-from-scratch recipe.
+- **Independent reroll**: Changing one dinner never changes the recipe shown on other dinner cards. If you reroll the source for a linked leftovers night, the old leftovers card becomes an independent dinner (no longer linked), so check its ingredients before shopping.
+- **Existing data**: v1.1 deliberately uses the same browser storage key as v1.0.0. Your saved recipes, notes, themes and plans are retained on the same website origin/path. A JSON backup before updating is still recommended.
+
+To apply smart planning settings, save them in **Plan options**, then tap **Generate my week**. This will regenerate unlocked nights; locked dinners will remain.
