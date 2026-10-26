@@ -1,16 +1,401 @@
-/* Dinner Deck v1.3 — history, ratings, and useful personal suggestions. */
+/* Dinner Deck v1.4 — Theme Studio + About & Help; all v1.3 data preserved. */
 'use strict';
 const STORE_KEY = 'dinner-deck-v1-data';
 const WEEKDAYS = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
 const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-const NAV = [ ['planner','calendar-days','Planner'], ['recipes','book-open','Recipes'], ['shopping','shopping-basket','Shopping'], ['history','clock','History'], ['settings','settings','Settings'] ];
+const NAV = [ ['planner','calendar-days','Planner'], ['recipes','book-open','Recipes'], ['shopping','shopping-basket','Shopping'], ['history','clock','History'], ['settings','settings','Settings'], ['about','info','About & Help'] ];
+const THEME_GROUPS = ["All", "Classics", "Pastel Playground", "Neon & Digital", "Retro & Experimental", "Atmospheres"];
 const THEMES = [
-  {id:'sage',name:'Sage',bg:'#eef1e9',sidebar:'#d8e7d9',accent:'#396f50'},
-  {id:'midnight',name:'Midnight',bg:'#172630',sidebar:'#2d4556',accent:'#7bb9da'},
-  {id:'peach',name:'Peach',bg:'#fff0e6',sidebar:'#f5d7c9',accent:'#b9664b'},
-  {id:'lavender',name:'Lavender',bg:'#f2ecfa',sidebar:'#d9cef0',accent:'#7860ad'},
-  {id:'forest',name:'Forest',bg:'#162d20',sidebar:'#30503b',accent:'#a5d195'},
-  {id:'slate',name:'Slate',bg:'#edf3f8',sidebar:'#ccdae6',accent:'#4b769a'}
+  {
+    "id": "sage",
+    "name": "Sage",
+    "group": "Classics",
+    "description": "Calm botanical",
+    "bg": "#eef1e9",
+    "sidebar": "#d8e7d9",
+    "accent": "#396f50",
+    "surface": "#fffefa",
+    "ink": "#243b2e",
+    "dark": false,
+    "style": "classic"
+  },
+  {
+    "id": "midnight",
+    "name": "Midnight",
+    "group": "Classics",
+    "description": "Blue after dark",
+    "bg": "#121b24",
+    "sidebar": "#182530",
+    "accent": "#7bb9da",
+    "surface": "#1b2935",
+    "ink": "#edf5f8",
+    "dark": true,
+    "style": "classic"
+  },
+  {
+    "id": "peach",
+    "name": "Peach",
+    "group": "Classics",
+    "description": "Soft orchard",
+    "bg": "#fff7f0",
+    "sidebar": "#fff0e6",
+    "accent": "#b9664b",
+    "surface": "#fffcf9",
+    "ink": "#49352d",
+    "dark": false,
+    "style": "classic"
+  },
+  {
+    "id": "lavender",
+    "name": "Lavender",
+    "group": "Classics",
+    "description": "Gentle lilac",
+    "bg": "#f8f6fd",
+    "sidebar": "#f1edfa",
+    "accent": "#7860ad",
+    "surface": "#fffefe",
+    "ink": "#383049",
+    "dark": false,
+    "style": "classic"
+  },
+  {
+    "id": "forest",
+    "name": "Forest",
+    "group": "Classics",
+    "description": "Woodland evening",
+    "bg": "#102018",
+    "sidebar": "#15281d",
+    "accent": "#a5d195",
+    "surface": "#1b3024",
+    "ink": "#f0f5ed",
+    "dark": true,
+    "style": "classic"
+  },
+  {
+    "id": "slate",
+    "name": "Slate",
+    "group": "Classics",
+    "description": "Quiet blue-grey",
+    "bg": "#f1f5f8",
+    "sidebar": "#e9f0f6",
+    "accent": "#4b769a",
+    "surface": "#ffffff",
+    "ink": "#263b50",
+    "dark": false,
+    "style": "classic"
+  },
+  {
+    "id": "candyfloss",
+    "name": "Candyfloss",
+    "group": "Pastel Playground",
+    "description": "Pink sugar skies",
+    "bg": "#fff1f8",
+    "sidebar": "#fae5f6",
+    "accent": "#c24d93",
+    "surface": "#fffaff",
+    "ink": "#593751",
+    "dark": false,
+    "style": "soft"
+  },
+  {
+    "id": "pistachio",
+    "name": "Pistachio",
+    "group": "Pastel Playground",
+    "description": "Creamy green",
+    "bg": "#f4f8e8",
+    "sidebar": "#e1edcf",
+    "accent": "#607c3b",
+    "surface": "#fffff6",
+    "ink": "#35492b",
+    "dark": false,
+    "style": "soft"
+  },
+  {
+    "id": "lemonade",
+    "name": "Lemonade",
+    "group": "Pastel Playground",
+    "description": "Sunshine soda",
+    "bg": "#fffbea",
+    "sidebar": "#fbefb6",
+    "accent": "#99791f",
+    "surface": "#fffefa",
+    "ink": "#4d451d",
+    "dark": false,
+    "style": "soft"
+  },
+  {
+    "id": "cloudnine",
+    "name": "Cloud Nine",
+    "group": "Pastel Playground",
+    "description": "Icy blue daydream",
+    "bg": "#eefaff",
+    "sidebar": "#daf3fb",
+    "accent": "#297d9e",
+    "surface": "#fbfeff",
+    "ink": "#284656",
+    "dark": false,
+    "style": "soft"
+  },
+  {
+    "id": "rosequartz",
+    "name": "Rose Quartz",
+    "group": "Pastel Playground",
+    "description": "Dusty pink glass",
+    "bg": "#faf1f2",
+    "sidebar": "#e9d9de",
+    "accent": "#ad5368",
+    "surface": "#fffafb",
+    "ink": "#543941",
+    "dark": false,
+    "style": "soft"
+  },
+  {
+    "id": "sakura",
+    "name": "Sakura",
+    "group": "Pastel Playground",
+    "description": "Cherry blossom",
+    "bg": "#fff8f8",
+    "sidebar": "#fce9ef",
+    "accent": "#ae4a71",
+    "surface": "#ffffff",
+    "ink": "#483241",
+    "dark": false,
+    "style": "soft"
+  },
+  {
+    "id": "neoncircuit",
+    "name": "Neon Circuit",
+    "group": "Neon & Digital",
+    "description": "Electric cyan",
+    "bg": "#07141b",
+    "sidebar": "#0c252d",
+    "accent": "#21f0ec",
+    "surface": "#10232b",
+    "ink": "#ddfaff",
+    "dark": true,
+    "style": "neon"
+  },
+  {
+    "id": "synthwave",
+    "name": "Synthwave",
+    "group": "Neon & Digital",
+    "description": "Pink sunset grid",
+    "bg": "#1c1033",
+    "sidebar": "#301a50",
+    "accent": "#ff66cd",
+    "surface": "#28183f",
+    "ink": "#fff0fb",
+    "dark": true,
+    "style": "neon"
+  },
+  {
+    "id": "acidlime",
+    "name": "Acid Lime",
+    "group": "Neon & Digital",
+    "description": "Unmissable green",
+    "bg": "#12150a",
+    "sidebar": "#222813",
+    "accent": "#c7ff31",
+    "surface": "#1c2010",
+    "ink": "#f3ffd8",
+    "dark": true,
+    "style": "neon"
+  },
+  {
+    "id": "cyberpunk",
+    "name": "Cyberpunk",
+    "group": "Neon & Digital",
+    "description": "Yellow warning lights",
+    "bg": "#111729",
+    "sidebar": "#202139",
+    "accent": "#ffd547",
+    "surface": "#21253a",
+    "ink": "#f6f1dd",
+    "dark": true,
+    "style": "neon"
+  },
+  {
+    "id": "matrix",
+    "name": "Terminal",
+    "group": "Neon & Digital",
+    "description": "Code-green terminal",
+    "bg": "#06100b",
+    "sidebar": "#0a1b12",
+    "accent": "#47ef86",
+    "surface": "#0d1d14",
+    "ink": "#d1ffe1",
+    "dark": true,
+    "style": "terminal"
+  },
+  {
+    "id": "ultraviolet",
+    "name": "Ultraviolet",
+    "group": "Neon & Digital",
+    "description": "Purple pulse",
+    "bg": "#160f29",
+    "sidebar": "#2a1946",
+    "accent": "#bc83ff",
+    "surface": "#281b3f",
+    "ink": "#f4eaff",
+    "dark": true,
+    "style": "neon"
+  },
+  {
+    "id": "retrodiner",
+    "name": "Retro Diner",
+    "group": "Retro & Experimental",
+    "description": "Cherry cola booths",
+    "bg": "#fff4df",
+    "sidebar": "#f8e5cb",
+    "accent": "#c13433",
+    "surface": "#fffefa",
+    "ink": "#412d2a",
+    "dark": false,
+    "style": "retro"
+  },
+  {
+    "id": "polaroid",
+    "name": "Polaroid",
+    "group": "Retro & Experimental",
+    "description": "Faded film print",
+    "bg": "#eee9df",
+    "sidebar": "#ded4c3",
+    "accent": "#577984",
+    "surface": "#fffbf1",
+    "ink": "#3f433e",
+    "dark": false,
+    "style": "editorial"
+  },
+  {
+    "id": "blueprint",
+    "name": "Blueprint",
+    "group": "Retro & Experimental",
+    "description": "Architect desk",
+    "bg": "#102b4e",
+    "sidebar": "#174166",
+    "accent": "#6dccff",
+    "surface": "#17395c",
+    "ink": "#e5f6ff",
+    "dark": true,
+    "style": "blueprint"
+  },
+  {
+    "id": "newspaper",
+    "name": "Newspaper",
+    "group": "Retro & Experimental",
+    "description": "Ink on paper",
+    "bg": "#f5f1e5",
+    "sidebar": "#ebe6d6",
+    "accent": "#22201a",
+    "surface": "#fffdf5",
+    "ink": "#292720",
+    "dark": false,
+    "style": "editorial"
+  },
+  {
+    "id": "comics",
+    "name": "Comic Book",
+    "group": "Retro & Experimental",
+    "description": "Pow! bright panels",
+    "bg": "#fff5ba",
+    "sidebar": "#ffd938",
+    "accent": "#de2d49",
+    "surface": "#fffef6",
+    "ink": "#252134",
+    "dark": false,
+    "style": "comic"
+  },
+  {
+    "id": "brutalist",
+    "name": "Brutalist",
+    "group": "Retro & Experimental",
+    "description": "Bold, sharp, loud",
+    "bg": "#f2f2ed",
+    "sidebar": "#c9cee4",
+    "accent": "#2733d4",
+    "surface": "#ffffff",
+    "ink": "#151924",
+    "dark": false,
+    "style": "brutalist"
+  },
+  {
+    "id": "deepsea",
+    "name": "Deep Sea",
+    "group": "Atmospheres",
+    "description": "Bioluminescent blue",
+    "bg": "#061e2a",
+    "sidebar": "#0e3748",
+    "accent": "#43d5d3",
+    "surface": "#112f3c",
+    "ink": "#defbfd",
+    "dark": true,
+    "style": "atmospheric"
+  },
+  {
+    "id": "ember",
+    "name": "Ember",
+    "group": "Atmospheres",
+    "description": "Firelight kitchen",
+    "bg": "#271b18",
+    "sidebar": "#412a23",
+    "accent": "#ff985d",
+    "surface": "#39251f",
+    "ink": "#fff0df",
+    "dark": true,
+    "style": "atmospheric"
+  },
+  {
+    "id": "solarflare",
+    "name": "Solar Flare",
+    "group": "Atmospheres",
+    "description": "Golden hour",
+    "bg": "#fff1d7",
+    "sidebar": "#ffdca3",
+    "accent": "#cf5b29",
+    "surface": "#fffbef",
+    "ink": "#603528",
+    "dark": false,
+    "style": "atmospheric"
+  },
+  {
+    "id": "moonstone",
+    "name": "Moonstone",
+    "group": "Atmospheres",
+    "description": "Velvet graphite",
+    "bg": "#191c25",
+    "sidebar": "#303341",
+    "accent": "#b2baff",
+    "surface": "#262b37",
+    "ink": "#ecefff",
+    "dark": true,
+    "style": "atmospheric"
+  },
+  {
+    "id": "aurora",
+    "name": "Aurora",
+    "group": "Atmospheres",
+    "description": "Northern lights",
+    "bg": "#0b1d24",
+    "sidebar": "#173a38",
+    "accent": "#6df0bc",
+    "surface": "#142d31",
+    "ink": "#e9fff7",
+    "dark": true,
+    "style": "atmospheric"
+  },
+  {
+    "id": "candypop",
+    "name": "Candy Pop",
+    "group": "Atmospheres",
+    "description": "High-energy colour",
+    "bg": "#fff0f1",
+    "sidebar": "#fbd9e4",
+    "accent": "#e04280",
+    "surface": "#fffefe",
+    "ink": "#41364e",
+    "dark": false,
+    "style": "playful"
+  }
 ];
 const EMOJIS = ['🍝','🥘','🌮','🍛','🥗','🍔','🍲','🍕','🌯','🍣','🍳','🥔','🍜','🍗','🐟','🥦','🍚','🍱','🥙','🥪','🥞','🍤','🍖','🍅'];
 const ICONS = {
@@ -37,6 +422,8 @@ const ICONS = {
  'heart':'<path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 1 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/>',
  'printer':'<path d="M6 9V3h12v6M6 18H4a2 2 0 0 1-2-2v-5a3 3 0 0 1 3-3h14a3 3 0 0 1 3 3v5a2 2 0 0 1-2 2h-2"/><path d="M6 14h12v7H6zM18 12h.01"/>',
  'list-filter':'<path d="M4 6h16M7 12h10m-7 6h4"/>',
+ 'hard-drive':'<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 16h.01M12 16h5M7 9h10"/>',
+ 'shield-check':'<path d="m12 2 8 4v6c0 5-3 8-8 10-5-2-8-5-8-10V6l8-4Z"/><path d="m8 12 3 3 5-5"/>',
  'calendar-check':'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4M16 3v4M3 10h18m-13 5 3 3 5-5"/>'
 };
 function icon(id, extra='') {return `<svg class="icon ${extra}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[id]||ICONS.info}</svg>`;}
@@ -75,6 +462,7 @@ function defaultState(){return {version:4,recipes:starterRecipes(),plans:{},pant
 function loadData(){try{const raw=localStorage.getItem(STORE_KEY);if(!raw)return defaultState();const parsed=JSON.parse(raw);if(!parsed||!Array.isArray(parsed.recipes)||!parsed.plans||typeof parsed.plans!=='object')throw Error('Invalid saved data');return {version:4,recipes:parsed.recipes.map(r=>({...r,rating:Math.max(0,Math.min(5,Math.round(Number(r.rating)||0)))})),plans:parsed.plans,pantry:Array.isArray(parsed.pantry)?parsed.pantry.filter(x=>typeof x==='string').map(niceName):[],settings:{...defaultState().settings,...parsed.settings}};}catch(e){console.warn('Could not open saved cookbook:',e);return defaultState();}}
 const hadSavedData = !!localStorage.getItem(STORE_KEY);
 let data=loadData();
+let themeGroup='All';
 let tab='planner', week=nextMonday(), recipeFilter='All', recipeSearch='', shopFilter='list', modal=null, photoDraft=null, emojiDraft='🍽️', toastTimer=null, storageOkay=true;
 function save(){try{localStorage.setItem(STORE_KEY,JSON.stringify(data));storageOkay=true;return true;}catch(e){storageOkay=false;showToast('Storage is full or unavailable. Export a backup and free up space.');return false;}}
 function showToast(msg){const region=document.getElementById('toastRegion');region.innerHTML=`<div class="toast">${escapeHTML(msg)}</div>`;if(toastTimer)clearTimeout(toastTimer);toastTimer=setTimeout(()=>region.innerHTML='',3500);}
@@ -83,7 +471,7 @@ function planFor(iso=week){if(!data.plans[iso])data.plans[iso]={slots:Array.from
  // v1.0 plans remain valid. A linked leftovers night always follows its immediately preceding cooked recipe.
  p.slots.forEach((s,i)=>{if(s.leftoverFrom===i-1 && i>0){const source=p.slots[i-1];if(source.id && recipe(source.id) && source.leftoverFrom == null){if(s.id!==source.id){s.id=source.id;s.cooked=false;}s.locked=false;}else{delete s.leftoverFrom;}}else if(s.leftoverFrom!=null){delete s.leftoverFrom;}});
  return p;}
-function setTheme(t){const theme=THEMES.some(x=>x.id===t)?t:'sage';data.settings.theme=theme;document.documentElement.dataset.theme=theme;document.querySelector('meta[name="theme-color"]').content=theme==='midnight'?'#121b24':theme==='forest'?'#102018':'#f6f5f0';save();}
+function setTheme(t){const theme=THEMES.some(x=>x.id===t)?t:'sage';data.settings.theme=theme;document.documentElement.dataset.theme=theme;document.querySelector('meta[name="theme-color"]').content=THEMES.find(x=>x.id===theme).bg;save();}
 /* v1.1 planning intelligence: avoid recent weeks, favour short meals on busy nights,
    encourage genuinely shared ingredients, and plan an intentional linked leftover meal. */
 function previousMealUse(target=week){const result=new Map();for(const [start,p] of Object.entries(data.plans)){
@@ -157,8 +545,15 @@ function ratingStars(r,compact=false){const v=recipeRating(r);return `<span clas
 function mealFace(r,cls='meal-thumb'){return `<span class="${cls}">${r?.photo?.startsWith('data:image/')?`<img src="${escapeAttr(r.photo)}" alt="">`:escapeHTML(r?.emoji||'🍽️')}</span>`;}
 function btn(text,action,options={}){return `<button type="button" class="btn ${options.cls||''}" data-action="${action}" ${options.dataset||''} ${options.disabled?'disabled':''}>${text}</button>`;}
 function emptyState(emoji,title,description,action='',label=''){return `<div class="empty-state"><div class="empty-emoji">${emoji}</div><h3>${title}</h3><p>${description}</p>${action?btn(`${icon('plus')} ${label}`,action,{cls:'primary'}):''}</div>`;}
-function renderNav(){document.getElementById('sideNav').innerHTML=NAV.map(([id,ico,title])=>`<button class="nav-link ${tab===id?'active':''}" data-action="navigate" data-tab="${id}" ${tab===id?'aria-current="page"':''}>${icon(ico)} ${title}</button>`).join('');document.getElementById('bottomNav').innerHTML=NAV.map(([id,ico,title])=>`<button class="bottom-link ${tab===id?'active':''}" data-action="navigate" data-tab="${id}" ${tab===id?'aria-current="page"':''}>${icon(ico)}<span>${title}</span></button>`).join('');document.getElementById('crumb').textContent=tab==='planner'?'A fresh week, a full plate.':NAV.find(x=>x[0]===tab)[2];document.querySelector('.topbar').classList.toggle('planner-topbar',tab==='planner');document.getElementById('storageIndicator').textContent=storageOkay?'Saved on this device':'Unsaved changes';document.getElementById('quickTheme').innerHTML=icon('sun');}
-function render(){const position=document.getElementById('weekCalendar')?.scrollLeft||0,vertical=window.scrollY;renderNav();document.getElementById('view').innerHTML=({planner:renderPlanner,recipes:renderRecipes,shopping:renderShopping,history:renderHistory,settings:renderSettings}[tab])();if(position&&tab==='planner')document.getElementById('weekCalendar').scrollLeft=position;if(vertical)window.scrollTo({top:vertical,behavior:'instant'});}
+function renderNav(){
+ document.getElementById('sideNav').innerHTML=NAV.map(([id,ico,title])=>`<button class="nav-link ${tab===id?'active':''}" data-action="navigate" data-tab="${id}" ${tab===id?'aria-current="page"':''}>${icon(ico)} ${title}</button>`).join('');
+ document.getElementById('bottomNav').innerHTML=NAV.filter(([id])=>id!=='about').map(([id,ico,title])=>`<button class="bottom-link ${tab===id?'active':''}" data-action="navigate" data-tab="${id}" ${tab===id?'aria-current="page"':''}>${icon(ico)}<span>${title}</span></button>`).join('');
+ document.getElementById('crumb').textContent=tab==='planner'?'A fresh week, a full plate.':NAV.find(x=>x[0]===tab)[2];
+ document.querySelector('.topbar').classList.toggle('planner-topbar',tab==='planner');
+ document.getElementById('storageIndicator').textContent=storageOkay?'Saved on this device':'Unsaved changes';
+ document.getElementById('quickTheme').innerHTML=icon('sun');
+}
+function render(){const position=document.getElementById('weekCalendar')?.scrollLeft||0,vertical=window.scrollY;renderNav();document.getElementById('view').innerHTML=({planner:renderPlanner,recipes:renderRecipes,shopping:renderShopping,history:renderHistory,settings:renderSettings,about:renderAbout}[tab])();if(position&&tab==='planner')document.getElementById('weekCalendar').scrollLeft=position;if(vertical)window.scrollTo({top:vertical,behavior:'instant'});}
 function navigate(next){if(!NAV.some(x=>x[0]===next))return;tab=next;recipeSearch='';recipeFilter='All';render();window.scrollTo({top:0,behavior:'instant'});}
 function renderPlanner(){const p=planFor(),unique=new Set(p.slots.filter((s,i)=>!isLeftover(s,i)).map(s=>s.id).filter(Boolean)).size;
  const cooked=p.slots.filter(s=>s.cooked).length,locked=p.slots.filter(s=>s.locked).length,planned=p.slots.filter(s=>s.id&&recipe(s.id)).length;
@@ -310,12 +705,31 @@ function historyRecipeRow(r,index,mode){const info=index.get(r.id)||{count:0,las
 }
 function openSuggestedDayPicker(id){const r=recipe(id);if(!r)return;modal={type:'plan-suggestion',id};const p=planFor();showModal(`${modalHeader('Plan '+r.name,'Choose which dinner to replace this week. Your other nights will stay the same.')}<div class="picker-list">${WEEKDAYS.map((name,i)=>`<button class="picker-item" data-action="assign-suggested-day" data-id="${escapeAttr(id)}" data-index="${i}"><span class="picker-emoji">${escapeHTML(r.emoji||'🍽️')}</span><span><strong>${name} ${escapeHTML(shortDate(addDays(week,i)))}</strong><small>${p.slots[i]?.id?`Replace ${escapeHTML(recipe(p.slots[i].id)?.name||'current meal')}`:'Empty dinner slot'}${p.slots[i]?.locked?' · Locked':''}</small></span>${icon(p.slots[i]?.locked?'lock':'arrow-right')}</button>`).join('')}</div><div class="modal-footer">${btn('Cancel','close-modal')}</div>`,false);}
 
+function themePreview(t){return `<span class="studio-preview" style="--sw-bg:${t.bg};--sw-side:${t.sidebar};--sw-main:${t.surface};--sw-accent:${t.accent};--sw-ink:${t.ink}"><span class="studio-sidebar"><i></i><i></i><i></i></span><span class="studio-stage"><i class="studio-bar"></i><span class="studio-cards"><i></i><i></i><i></i></span><span class="studio-lines"><i></i><i></i></span></span></span>`;}
+function themeChoices(){return `<div class="theme-categories" role="group" aria-label="Theme collections">${THEME_GROUPS.map(g=>`<button class="theme-category ${themeGroup===g?'selected':''}" type="button" data-action="theme-group" data-group="${escapeAttr(g)}" aria-pressed="${themeGroup===g}">${escapeHTML(g)}</button>`).join('')}</div><div class="theme-studio-grid">${THEMES.filter(t=>themeGroup==='All'||t.group===themeGroup).map(t=>`<button class="theme-studio-card ${data.settings.theme===t.id?'selected':''} style="--sw-accent:${t.accent};--sw-main:${t.surface}" type="button" data-action="set-theme" data-theme="${t.id}" aria-label="Use ${escapeAttr(t.name)} theme" aria-pressed="${data.settings.theme===t.id}">${themePreview(t)}<span class="studio-card-info"><span class="studio-name">${escapeHTML(t.name)}</span>${data.settings.theme===t.id?icon('check','i-sm'):''}</span><span class="studio-caption">${escapeHTML(t.description)}</span></button>`).join('')}</div>`;}
+function renderThemeGallery(){return `<section class="card card-pad theme-studio-section"><div class="theme-studio-heading"><div><div class="eyebrow">THEME STUDIO · ${THEMES.length} LOOKS</div><h2 class="section-title">Dress up your dinner deck.</h2><p class="section-subtitle">From soft pastels to glowing arcades and printed newspapers. Themes change colours, typography, shapes and details; only the look changes, never your recipes.</p></div><span class="studio-current">${icon('check-circle','i-sm')} ${escapeHTML(THEMES.find(t=>t.id===data.settings.theme)?.name||'Sage')} active</span></div>${themeChoices()}</section>`;}
+function openThemeStudio(){modal={type:'theme-studio'};showModal(`${modalHeader('Theme Studio','Pick a completely different personality for Dinner Deck. Changes apply instantly and save on this device.')}<div class="theme-studio-modal">${themeChoices()}</div><div class="modal-footer">${btn('Done','close-modal',{cls:'primary'})}</div>`,true);}
 function renderSettings(){return `<div class="page-head"><div><div class="eyebrow">MAKE IT YOURS</div><h1>Your kitchen, your rules.</h1><p>Set up Dinner Deck the way you like it. Everything stays on this device.</p></div></div>
- <div class="settings-grid"><div class="settings-stack"><section class="card card-pad"><h2 class="section-title">Choose a colour mood</h2><p class="section-subtitle">Six looks, same familiar kitchen.</p><div class="theme-grid">${THEMES.map(t=>`<button class="theme-option ${data.settings.theme===t.id?'current':''}" data-action="set-theme" data-theme="${t.id}"><div class="theme-preview" style="background:${t.bg}"><i style="background:${t.sidebar}"></i><div><b style="background:${t.accent}"></b><b style="background:${t.sidebar}"></b></div></div><span>${data.settings.theme===t.id?icon('check','i-sm'):''}${t.name}</span></button>`).join('')}</div></section>
- <section class="card card-pad"><h2 class="section-title">Dinner preferences</h2><p class="section-subtitle">Smart planning: quick nights, leftovers and shared ingredients.</p><div class="setting-buttons preference-action">${btn(icon('sliders')+' Smart planning options','plan-options',{cls:'soft'})}</div><div class="form-row"><div><strong>People eating dinner</strong><p>Shopping quantities scale to this many servings.</p></div><input id="householdServings" class="input number-input" type="number" min="1" max="30" step="1" value="${Number(data.settings.servings)||2}" aria-label="Number of people eating dinner"></div><label class="form-row"><div><strong>Avoid recently used recipes</strong><p>Prioritise meals you haven't had lately when generating.</p></div><input id="avoidRecent" type="checkbox" ${data.settings.avoidRecent?'checked':''}></label><label class="form-row"><div><strong>Hide pantry ingredients</strong><p>Remove things you already have from the shared list.</p></div><input id="settingsHidePantry" type="checkbox" ${data.settings.hidePantry?'checked':''}></label></section>
+ ${renderThemeGallery()} <div class="settings-grid"><div class="settings-stack"> <section class="card card-pad"><h2 class="section-title">Dinner preferences</h2><p class="section-subtitle">Smart planning: quick nights, leftovers and shared ingredients.</p><div class="setting-buttons preference-action">${btn(icon('sliders')+' Smart planning options','plan-options',{cls:'soft'})}</div><div class="form-row"><div><strong>People eating dinner</strong><p>Shopping quantities scale to this many servings.</p></div><input id="householdServings" class="input number-input" type="number" min="1" max="30" step="1" value="${Number(data.settings.servings)||2}" aria-label="Number of people eating dinner"></div><label class="form-row"><div><strong>Avoid recently used recipes</strong><p>Prioritise meals you haven't had lately when generating.</p></div><input id="avoidRecent" type="checkbox" ${data.settings.avoidRecent?'checked':''}></label><label class="form-row"><div><strong>Hide pantry ingredients</strong><p>Remove things you already have from the shared list.</p></div><input id="settingsHidePantry" type="checkbox" ${data.settings.hidePantry?'checked':''}></label></section>
  </div><div class="settings-stack"><section class="card card-pad"><div class="eyebrow">YOUR DATA, YOUR CONTROL</div><h2 class="section-title">Cookbook backup</h2><p class="section-subtitle">Recipes, notes, plans, shopping adjustments, pantry, extras and settings are stored privately in your browser. Export a backup occasionally or when changing phones.</p><div class="setting-buttons">${btn(icon('download')+' Export JSON','backup-data',{cls:'primary'})}${btn(icon('upload')+' Import JSON','import-data')}</div><div class="divider"></div><p class="section-subtitle">Using a different device? Import your backup there to carry your recipes across. This version does not sync automatically.</p></section>
  <section class="card card-pad"><div class="eyebrow">TAKE DINNER DECK ANYWHERE</div><h2 class="section-title">Install on your phone</h2><p class="section-subtitle">This app is an installable PWA that can work offline after the first visit.</p><div id="installAction">${installPrompt?btn(icon('download')+' Install app','install-app',{cls:'primary',dataset:'id="installButton"'}):''}</div><div class="install-help"><strong>iPhone:</strong> Open the live GitHub Pages site in Safari → Share → Add to Home Screen.<br><br><strong>Android:</strong> Open the live site in Chrome → menu → Install app / Add to Home screen.</div></section>
- <section class="card card-pad"><div class="eyebrow">HOUSEKEEPING</div><h2 class="section-title">Starter recipes</h2><p class="section-subtitle">The included meals are examples you can freely edit or delete.</p><div class="setting-buttons">${btn(icon('trash')+' Remove starter recipes','remove-starters',{cls:'danger'})}</div><div class="divider"></div><p class="small muted">Dinner Deck v1.3.0 · No accounts, no subscriptions and no third-party trackers.</p></section></div></div>`;}
+ <section class="card card-pad"><div class="eyebrow">HOUSEKEEPING</div><h2 class="section-title">Starter recipes</h2><p class="section-subtitle">The included meals are examples you can freely edit or delete.</p><div class="setting-buttons">${btn(icon('trash')+' Remove starter recipes','remove-starters',{cls:'danger'})}</div><div class="divider"></div><p class="small muted">Dinner Deck v1.4.0 · No accounts, no subscriptions and no third-party trackers.</p></section>
+ <section class="card card-pad"><div class="eyebrow">NEED A HAND?</div><h2 class="section-title">About & Help</h2><p class="section-subtitle">How the app works, where your recipes are saved, backups, offline use and a complete guide to every tab.</p><div class="setting-buttons">${btn(icon('info')+' Open About & Help','go-about',{cls:'soft'})}</div></section></div></div>`;}
+
+function renderAbout(){return `<div class="page-head"><div><div class="eyebrow">DINNER DECK · VERSION 1.4</div><h1>A little guide to your kitchen.</h1><p>Everything you need to know about using Dinner Deck, keeping your cookbook safe and taking your list to the shops.</p></div><div class="page-actions">${btn(icon('calendar-days')+' Go to Planner','go-planner',{cls:'primary'})}</div></div>
+<div class="about-intro"><div class="about-intro-art">${icon('book-open')}</div><div><div class="eyebrow">BUILT FOR THE WEEKLY DINNER QUESTION</div><h2>Less deciding. More enjoying.</h2><p>Dinner Deck is a small personal cookbook, dinner planner and grocery-list maker. You don't need an account, a subscription, or an internet connection every time you cook.</p></div></div>
+<div class="about-toc"><a href="#help-start">Getting started</a><a href="#help-guide">Feature guide</a><a href="#help-data">Where data lives</a><a href="#help-phone">Install & offline</a><a href="#help-faq">Questions</a></div>
+<section class="help-section" id="help-start"><div class="eyebrow">START HERE</div><h2>Five minutes to your first week.</h2><div class="help-steps"><div class="help-step"><span>01</span><strong>Choose your recipes</strong><p>Visit Recipes to edit the example meals or add your own. Ingredients go one per line; a short method and your cooking notes are optional.</p></div><div class="help-step"><span>02</span><strong>Build a week</strong><p>Open Planner, choose a week and select Generate my week. Tap any dinner to see its recipe, reroll just one day, or lock something you want to keep.</p></div><div class="help-step"><span>03</span><strong>Check your shopping</strong><p>Open Shopping to review the combined ingredients, add anything else, mark pantry staples, and share or export the list.</p></div><div class="help-step"><span>04</span><strong>Learn as you cook</strong><p>Mark a dinner cooked in the Planner. History tracks those meals, and ratings and favourites help future suggestions.</p></div></div></section>
+<section class="help-section" id="help-guide"><div class="eyebrow">EVERY TAB EXPLAINED</div><h2>The everyday user guide.</h2><div class="help-guide-grid"><article class="card card-pad help-guide-card"><div class="help-icon">${icon('calendar-days')}</div><h3>Planner</h3><p>Browse weeks with arrows. Generate seven dinners, or tap a day to pick one. Tap the meal to open its recipe. Reroll ${icon('refresh-cw','i-sm')} changes one day; Lock ${icon('lock','i-sm')} protects that choice when regenerating the week.</p><p>Plan options control quick dinner nights, leftovers, variety and ingredient overlap. Leftovers follow the previous night's meal; quantities are calculated for both evenings. Use the check-circle on a day to mark it cooked.</p></article>
+<article class="card card-pad help-guide-card"><div class="help-icon">${icon('book-open')}</div><h3>Recipes</h3><p>Add meals you actually cook. Keep an ingredient list, optional directions, tags, photo, personal notes, time and servings. Edit any recipe later to record your improvements.</p><p>Tap a recipe to see the details, rate it 1–5 stars or mark it a favourite. These preferences inform suggestions but don't force the same dinners every week.</p></article>
+<article class="card card-pad help-guide-card"><div class="help-icon">${icon('shopping-basket')}</div><h3>Shopping</h3><p>The list is generated from the <strong>currently selected week</strong> and the number of people in Settings. Quantities combine where ingredient names and units match. Check the totals before shopping.</p><p>Use the quick-add bar for extra items. Mark things Bought, At Home, or Removed, edit individual items, and switch filters. Share your list using your phone, or use the export menu to copy, download TXT/CSV, or print to PDF.</p></article>
+<article class="card card-pad help-guide-card"><div class="help-icon">${icon('clock')}</div><h3>History</h3><p>See dinners you've marked cooked, your most-cooked meals, recipes that haven't appeared lately, and suggestions based on your cookbook. Reuse an older weekly plan or assign a suggested meal to a day.</p><p>Simply passing a calendar date does not mean a dinner was cooked; use the cooked button to record it.</p></article>
+<article class="card card-pad help-guide-card"><div class="help-icon">${icon('settings')}</div><h3>Settings</h3><p>Choose a theme, set how many people are eating, adjust how the planner selects meals, and manage pantry behaviour. Export or import a full cookbook backup here.</p><p>Theme changes affect only this device. Your recipes, planner and shopping items are not changed when you switch themes.</p></article>
+</div></section>
+<section class="help-section" id="help-data"><div class="eyebrow">YOUR DATA & PRIVACY</div><h2>Where everything is saved.</h2><div class="help-data-grid"><div class="card card-pad"><div class="help-fact"><span>${icon('info')}</span><div><h3>How Dinner Deck runs</h3><p>GitHub Pages delivers the app's HTML, CSS and JavaScript. Your browser runs the meal generator, recipe editor, history, shopping calculations and theme styling locally. The service worker caches the app files; no external recipe API or cloud database is needed.</p></div></div><div class="help-fact"><span>${icon('hard-drive')}</span><div><h3>Saved in this browser, on this device</h3><p>Most changes save immediately. Recipes, photos, personal notes, ratings, weekly plans, shopping edits, pantry items, and preferences are stored in browser local storage (<code>localStorage</code>) for this website. There is no account, cloud database, automatic sync, or third-party tracker.</p></div></div><div class="help-fact"><span>${icon('shield-check')}</span><div><h3>Keep a backup</h3><p>Local browser data may be deleted when site data is cleared, a browser/profile is removed, or storage fails. To move between devices, export your cookbook as a JSON file in Settings, then import that file on the other device. Import replaces the destination's current cookbook, so back it up first.</p></div></div><div class="help-fact"><span>${icon('share')}</span><div><h3>Sharing is not synchronisation</h3><p>Sending a shopping list shares a snapshot (text, CSV, or PDF), not live access to your saved cookbook. Two phones do not automatically update each other in this version.</p></div></div></div><aside class="card card-pad help-side-note"><div class="eyebrow">GOOD HABIT</div><h3>Back up before updates.</h3><p>Export a JSON backup after adding lots of recipes, before changing phones or browsers, and before major app updates.</p>${btn(icon('settings')+' Open Settings','go-settings',{cls:'primary'})}<p class="small muted">Theme settings are included in the backup; importing will apply the saved theme.</p></aside></div></section>
+<section class="help-section" id="help-phone"><div class="eyebrow">TAKE IT WITH YOU</div><h2>On your phone & offline.</h2><div class="help-phone-grid"><article class="card card-pad"><h3>iPhone / iPad</h3><p>Open the live HTTPS Dinner Deck website in Safari. Tap Share, then <strong>Add to Home Screen</strong>. Open it from the new icon to use it like an app.</p></article><article class="card card-pad"><h3>Android</h3><p>Open the site in Chrome. Use the browser menu and choose <strong>Install app</strong> or <strong>Add to Home screen</strong>, depending on your device.</p></article><article class="card card-pad"><h3>Offline use</h3><p>After the first successful online visit, a service worker caches the app files for offline access. Your saved cookbook is stored separately in local browser storage. Internet may still be needed to share through another app, install updates or restore from a file.</p></article></div></section>
+<section class="help-section" id="help-faq"><div class="eyebrow">GOOD TO KNOW</div><h2>Common questions.</h2><div class="help-faq"><details><summary>Why can't I see my recipes on another phone?</summary><p>Data stays in each browser's local storage. Open Settings → Export JSON on the original phone, transfer the file, then use Import JSON on the new phone. This replaces the new phone's saved cookbook.</p></details><details><summary>What happens if I change themes?</summary><p>Only the visual appearance changes: colours, typography, card shapes, and decorative effects. Every recipe, note, plan and shopping item stays the same.</p></details><details><summary>Will the app work without reception at the supermarket?</summary><p>Normally yes, after the app has loaded successfully online and the service worker has cached the app files. Already-saved plans and lists stay available locally. Sharing and downloading can depend on your browser and device.</p></details><details><summary>Why is a shopping quantity wrong?</summary><p>Quantities depend on the ingredient text in each recipe, recipe servings and the People eating dinner setting. Different spellings or units might not merge perfectly. You can edit the quantity for this week directly in Shopping without changing the recipe.</p></details><details><summary>Does Dinner Deck automatically know I cooked a meal?</summary><p>No. In Planner, select the check-circle on the relevant day to record a cooked dinner. History uses those marked meals rather than assuming planned meals were eaten.</p></details><details><summary>Will installing a new app version erase my recipes?</summary><p>Updating files on the same website and browser normally preserves local storage. It is not guaranteed if the URL/origin changes, browser data is cleared, or storage fails. Export a JSON backup first.</p></details></div></section>
+<footer class="about-footer">Dinner Deck v1.4 · Offline-friendly, local-first and made for simpler dinners. ${icon('heart','i-sm')}</footer>`;}
 /* Modals */
 function showModal(html,wide=false){document.getElementById('modalRoot').innerHTML=`<div class="modal-backdrop" data-action="backdrop"><section class="modal ${wide?'wide':''}" role="dialog" aria-modal="true" aria-label="Dinner Deck dialog">${html}</section></div>`;setTimeout(()=>document.querySelector('.modal [autofocus], .modal .modal-close')?.focus(),10);}
 function closeModal(){document.getElementById('modalRoot').innerHTML='';modal=null;photoDraft=null;}
@@ -368,8 +782,13 @@ window.addEventListener('appinstalled',()=>{installPrompt=null;showToast('Dinner
 async function doAction(btn){const action=btn.dataset.action,index=Number(btn.dataset.index),id=btn.dataset.id;
  switch(action){
  case 'navigate':navigate(btn.dataset.tab);break;
- case 'cycle-theme':{const idx=THEMES.findIndex(t=>t.id===data.settings.theme);setTheme(THEMES[(idx+1)%THEMES.length].id);render();showToast(`Theme: ${THEMES[(idx+1)%THEMES.length].name}`);break;}
- case 'set-theme':setTheme(btn.dataset.theme);render();break;
+ case 'cycle-theme':openThemeStudio();break;
+ case 'set-theme':{setTheme(btn.dataset.theme);const inStudio=modal?.type==='theme-studio';render();if(inStudio)openThemeStudio();showToast(`Theme: ${THEMES.find(t=>t.id===data.settings.theme)?.name}`);break;}
+ case 'theme-group':{themeGroup=btn.dataset.group;if(!THEME_GROUPS.includes(themeGroup))themeGroup='All';if(modal?.type==='theme-studio')openThemeStudio();else render();break;}
+ case 'open-theme-studio':openThemeStudio();break;
+ case 'go-about':navigate('about');break;
+ case 'go-settings':navigate('settings');break;
+ case 'go-planner':navigate('planner');break;
  case 'go-shopping':navigate('shopping');break;
  case 'plan-options':openPlanningPreferences();break;
  case 'scroll-week-left':document.getElementById('weekCalendar')?.scrollBy({left:-440,behavior:'smooth'});break;

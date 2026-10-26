@@ -1,32 +1,37 @@
-# Dinner Deck v1.3 — Personal Dinner Diary & Recommendations
+# Dinner Deck v1.4 — Theme Studio & About/Help
 
-An offline-capable, GitHub Pages-hosted Progressive Web App for weekly dinner planning, personal recipes, and practical shopping lists.
+Local-first dinner planner, personal recipes, shopping lists, history, and 30 radically different UI themes. GitHub Pages-ready, offline-friendly Progressive Web App.
 
-## What's new in v1.3
+## New in v1.4
 
-- Removed the **Upcoming** planner button. Use the left/right week arrows to navigate; the initial view still defaults to next Monday.
-- **Rate recipes (1–5 stars)** by opening any recipe card. Tap your selected rating again to clear it. Ratings are preserved when editing a recipe and in JSON backups.
-- **Personalised dinner selection** considers your star ratings, favourites, cooked-meal history, variety, recent plans, quick dinner nights, and ingredient overlaps. Ratings are a preference, not a guarantee; the generator still introduces variety.
-- **Recipes filters** now include Top rated and Not yet cooked.
-- The **History tab** includes most-cooked meals, recipes you haven't cooked in a while, an actual cooked-meal diary, and three suggested dinners that can be assigned to a day of your current week.
-- Added **plan a suggested meal** flow: choose a day; a locked dinner cannot be overridden.
-- Added two controls in Plan options: boost highly-rated/favourite meals and encourage trying uncooked recipes.
-- Retained all v1.2.1 shopping refinements, your horizontal planner, reroll-one-day, recipes, notes, ingredient consolidation, leftovers, six themes, and app installation.
+- **30 themes in 5 categories:** six original classics plus Pastel Playground, Neon & Digital, Retro & Experimental, and Atmospheres. Beyond colours: different fonts, border styles, cards, background patterns, radii, gradients and glow effects.
+- **Theme Studio** is available in Settings and from the small sun icon at the top on every page. Switching themes changes presentation only; recipes and plans are unaffected.
+- **About & Help** page on desktop sidebar and through Settings on mobile. Includes a getting-started walkthrough, each tab explained, data storage and backups, offline/PWA installation instructions, FAQ, and troubleshooting tips.
+- All v1.3 planner, individual meal rerolls, leftover handling, ratings, history, recipes, shopping, pantry, sharing, backup/restore, and data format retained.
 
-## Deploy to GitHub Pages
+## Updating GitHub Pages
 
-Extract this ZIP and upload **everything inside**, not the enclosing folder, into the root of your existing Dinner Deck repository (replacing older files). Commit. GitHub Pages uses the `main` branch and `/ (root)` via **Settings → Pages**.
+1. In your currently installed Dinner Deck, **Settings → Export JSON**. Keep that backup.
+2. Extract the ZIP, and upload all contained files/folders to the **root** of your existing GitHub repository, replacing old files. Commit.
+3. Ensure GitHub Pages uses `main` and `/ (root)` under **Settings → Pages**.
+4. Reload the website once online. The service worker cache name changed so the updated app files are fetched and cached. If your home-screen app shows old files, restart/reopen it online.
 
-The `sw.js` cache is versioned and uses network-first fetching so deployed changes update promptly when online. If an installed mobile app appears stale, reconnect and reload/close-reopen it.
+## Your data, accurately explained
 
-## Data / upgrading
+Recipes, notes, photos, meal plans, personal preferences, pantry and shopping state are saved in this browser's **localStorage** (key `dinner-deck-v1-data`). There are no accounts, cloud databases or device syncing. Data is stored separately for each website origin/browser/profile; clearing site data can erase it. Export a JSON backup before updates, moving devices or clearing browser data. Import JSON **replaces** the receiving browser's current cookbook after confirmation. Themes are saved per device and included in backups. Shopping shares are snapshots, not live collaborations.
 
-**Export a JSON backup under Settings before updating.** The localStorage key remains `dinner-deck-v1-data`. Existing v1.0–v1.2.1 saved recipes, notes, plans, pantry items and shopping customisations are kept. Old recipes default to unrated. Import/export JSON includes all ratings and saved preferences. The app is local-only and does not synchronise between devices.
+Offline works after initial online loading and service worker cache installation. Offline install/availability depends on supported browsers and secure HTTPS hosting. Photo-heavy libraries may approach browser storage limits; back up regularly.
 
-## Offline
+## Theme collections
 
-The app runs after initial online loading with the service worker; sharing through the device's share sheet depends on browser support and connection to the target app.
+- Classics: Sage, Midnight, Peach, Lavender, Forest, Slate
+- Pastel Playground: Candyfloss, Pistachio, Lemonade, Cloud Nine, Rose Quartz, Sakura
+- Neon & Digital: Neon Circuit, Synthwave, Acid Lime, Cyberpunk, Terminal, Ultraviolet
+- Retro & Experimental: Retro Diner, Polaroid, Blueprint, Newspaper, Comic Book, Brutalist
+- Atmospheres: Deep Sea, Ember, Solar Flare, Moonstone, Aurora, Candy Pop
 
-## Notes
+## Navigation
 
-Meal history counts dinners **marked cooked** in the Planner. It is not automatically inferred from the passage of time. Historical meal frequency includes previously marked days even if subsequently re-used in a different saved week.
+Planner, Recipes, Shopping, History, Settings remain the five bottom tabs on phones. **About & Help** is linked from Settings and appears as a sixth item in the desktop sidebar to keep mobile navigation uncluttered.
+
+No new permissions, subscriptions, fonts, networks, or external services are required.
