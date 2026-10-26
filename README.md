@@ -1,4 +1,4 @@
-# Dinner Deck v1.1 — personal dinner planner
+# Dinner Deck v1.2 — personal dinner planner
 
 Your recipe collection, an intelligent horizontal weekly calendar, and a consolidated shopping list in one installable web app.
 
@@ -38,7 +38,7 @@ The shopping list share button uses your device's native Web Share API when supp
 
 ## Version
 
-Dinner Deck v1.1.0, built as a framework-free, static HTML/CSS/JavaScript Progressive Web App.
+Dinner Deck v1.2.0, built as a framework-free, static HTML/CSS/JavaScript Progressive Web App.
 
 ## v1.1 smarter scheduling
 
@@ -50,3 +50,16 @@ Dinner Deck v1.1.0, built as a framework-free, static HTML/CSS/JavaScript Progre
 - **Existing data**: v1.1 deliberately uses the same browser storage key as v1.0.0. Your saved recipes, notes, themes and plans are retained on the same website origin/path. A JSON backup before updating is still recommended.
 
 To apply smart planning settings, save them in **Plan options**, then tap **Generate my week**. This will regenerate unlocked nights; locked dinners will remain.
+
+## New in v1.2 — The shopping workspace
+
+- **At-a-glance statuses:** count what remains to buy, what you have bought, and what is already at home. Filter to All items, To buy, Bought, At home or Removed.
+- **Edit a shopping item:** use the pencil icon to adjust its name, amount, unit, shop category, or note for the shopper **for this week only**. The original recipe is unchanged. Reset that item's override from its edit window.
+- **Add custom items** with an optional amount, unit and category. Existing v1.0/v1.1 simple extra items continue to work.
+- **Remove for this week:** use the X beside an item; retrieve it from the **Removed** filter. This does not remove the ingredient from the recipe.
+- **Manage pantry:** mark ingredients you have at home with the box icon, including an editable pantry staple list and quick-add suggestions. Use the **At home** filter to see or undo pantry exclusions; toggle hiding from the main list. Pantry is an on/off flag, not a live inventory count.
+- **Better exports:** choose **Only still to buy** (default; excludes bought, pantry and removed items) or **Full list** (includes bought/pantry with labels). Share via the device's share menu or fallback copy; download text or CSV; use your browser's **Print / Save as PDF** option. The person receiving a list does not need an app.
+- **Quantities:** merge exact ingredient names with compatible units and standardise kg→g / litres→ml before totalling. Handles fraction notation such as 1/2 cup and compact units such as 500g. Rounded whole groceries (tins, onions) are practical shopping estimates. Unknown unit conversions or ingredient synonyms are deliberately **not** guessed; adjust those entries manually.
+- **Existing data:** the app keeps the **same** `dinner-deck-v1-data` localStorage key. Existing recipes, notes, themes, plans, basic pantry entries and check marks are preserved. A new `shopEdits`/`shopHidden` map is added to each week's plan when used. Reimporting a v1.1 backup is supported.
+
+**Tip:** Make a JSON backup under Settings before overwriting files on GitHub. On mobile, reload the live site after deployment to update the offline app cache. Export uses the week currently selected in Planner.

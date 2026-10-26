@@ -49,3 +49,31 @@ svg.icon {height:19px;width:19px;stroke-width:1.85;vertical-align:middle;flex:no
 @media(max-width:1150px){.week-columns{min-width:1060px}}
 @media(max-width:650px){.calendar-topline{align-items:center}.calendar-topline p{max-width:225px}.week-columns{min-width:0;width:max-content;grid-template-columns:repeat(7,205px);gap:10px}.week-calendar{margin-left:-16px;margin-right:-16px;padding-left:16px;padding-right:16px;scroll-snap-type:x proximity;scroll-padding-left:16px}.calendar-day{min-height:383px;scroll-snap-align:start}.calendar-art{height:138px;font-size:54px}.calendar-date{padding:13px}.calendar-meal-name{font-size:14px}.calendar-day-actions .icon-button{width:37px;height:38px}.week-tools>.group-actions{flex-wrap:wrap;justify-content:flex-start}.week-tools>.group-actions>.btn{flex:1 1 auto}.week-summary{gap:12px;padding:17px 13px}.week-summary-stats{width:100%;order:2;gap:7px;justify-content:space-between}.week-summary-stats strong{font-size:20px}.week-summary-stats small{font-size:9px}.week-summary>.btn{margin-left:auto}.planner-advice{align-items:flex-start;flex-wrap:wrap;gap:9px}.planner-advice .btn{margin-left:auto}.day-picker{gap:4px}.day-check span{padding:10px 0;font-size:10px}}
 @media(max-width:370px){.week-columns{grid-template-columns:repeat(7,190px)}.week-summary-stats{flex-wrap:wrap;justify-content:flex-start;column-gap:20px}.calendar-topline p{font-size:10px}}
+
+/* v1.2 — Shopping workspace */
+.shop-overview{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-bottom:18px}
+.shopping-metric{min-width:0;padding:17px 20px;display:grid;grid-template-columns:38px 1fr;grid-template-rows:auto auto;column-gap:12px;align-items:center}
+.shopping-metric .metric-symbol{grid-row:1/3;display:grid;place-items:center;width:38px;height:38px;border-radius:12px;background:var(--accent-soft);color:var(--accent)}
+.shopping-metric strong{font:700 27px Georgia,serif;line-height:1.2}.shopping-metric small{font-size:11px;color:var(--muted)}
+.shopping-layout-v12{grid-template-columns:minmax(0,1fr) 313px}.shop-filters{display:flex;flex-wrap:wrap;gap:7px;margin:12px 0 7px}
+.shop-filters .filter-chip{display:inline-flex;gap:7px;align-items:center}.shop-filters .filter-chip span{font-size:10px;opacity:.7}
+.shop-item.enhanced{padding:8px 0;min-height:58px;border-bottom:1px solid var(--border);gap:8px}.shop-item.enhanced:last-child{border-bottom:0}
+.shop-line{flex:1;min-width:0;display:grid;gap:3px}.shop-name{overflow-wrap:anywhere}.shop-note,.shop-source{font-size:11px;color:var(--muted);overflow-wrap:anywhere}
+.shop-note svg{vertical-align:middle}.shop-source{font-size:10px}.shop-item.enhanced .icon-button{width:30px;height:32px;flex:none;padding:6px;color:var(--muted)}
+.shop-item.enhanced .icon-button:hover,.shop-item.enhanced .icon-button.tinted{background:var(--accent-soft);color:var(--accent)}
+.shop-item .shop-check{cursor:pointer}.shop-item .shop-check:disabled{cursor:default;opacity:.3}
+.shop-empty{padding:52px 12px;text-align:center;color:var(--muted);font-size:13px;line-height:1.6}
+.shopping-export-panel{border-color:color-mix(in srgb,var(--accent) 30%,var(--border))}.shop-export-select{display:grid;gap:7px;margin-top:15px}.shop-export-select label,.shop-extra-form label span{font-size:11px;font-weight:720;color:var(--text)}
+.shop-extra-form{display:grid;gap:11px;margin-top:14px}.shop-extra-form .field{gap:5px}.shop-extra-form-bottom{display:grid;grid-template-columns:1fr 1fr;gap:10px}.shop-extra-form .full{width:100%}.shop-hint{font-size:11px!important;line-height:1.6!important}.shopping-help p{font-size:11px!important}
+.pantry-add-form{display:flex;gap:10px;align-items:end;margin-bottom:15px}.pantry-add-form>.field{flex:1}.pantry-add-form .btn{flex:none}
+.pantry-quick-add{display:flex;flex-wrap:wrap;align-items:center;gap:7px;margin-bottom:15px}.pantry-quick-add strong{font-size:11px;margin-right:4px}.pantry-quick-add .filter-chip{font-size:11px;padding:6px 10px}
+.pantry-list{display:grid;gap:7px;max-height:270px;overflow:auto}.print-sheet{display:none}
+@media(max-width:1180px){.shopping-layout-v12{grid-template-columns:minmax(0,1fr) 270px}}
+@media(max-width:900px){.shopping-layout-v12{grid-template-columns:1fr}.shopping-side{grid-template-columns:repeat(2,minmax(0,1fr))}.shopping-help{grid-column:1/-1}}
+@media(max-width:650px){.shop-overview{gap:7px}.shopping-metric{padding:12px 9px;display:flex;flex-direction:column;gap:4px;text-align:center}.shopping-metric .metric-symbol{width:33px;height:33px}.shopping-metric strong{font-size:23px}.shopping-metric small{font-size:10px}
+.shopping-main{padding:16px 14px}.shopping-main-head{align-items:flex-start;gap:8px}.shopping-main-head .section-title{font-size:19px}.shopping-main-head .btn{font-size:10px;padding:7px;min-height:35px}
+.shopping-side{grid-template-columns:1fr}.shop-item.enhanced{gap:5px}.shop-item.enhanced .icon-button{width:29px;padding:5px}.shop-item.enhanced .icon-button svg{width:16px;height:16px}
+.shop-item.enhanced .shop-check{width:19px;height:19px}.item-pantry{font-size:9px;padding:3px 4px}.shop-filters{gap:5px}.shop-filters .filter-chip{font-size:10px;padding:7px 9px}
+.pantry-add-form{flex-wrap:wrap}.pantry-add-form .field{min-width:190px}}
+@media print{ @page{size:A4;margin:17mm}body{background:white!important;color:#1c1c1c!important;font-family:Arial,sans-serif!important;font-size:12pt}
+.app-shell,.modal-backdrop,.toast-region{display:none!important}.print-sheet{display:block!important}.print-sheet h1{font:bold 23pt Georgia,serif;margin:0 0 6mm}.print-sheet>p{font-size:11pt;color:#444;margin-bottom:10mm}.print-sheet h2{font-size:11pt;text-transform:uppercase;letter-spacing:1px;border-bottom:1px solid #999;padding-bottom:2mm;margin:6mm 0 3mm;break-after:avoid}.print-sheet ul{list-style:none;padding:0;margin:0}.print-sheet li{padding:2.5mm 0;border-bottom:1px solid #ddd;break-inside:avoid}}
